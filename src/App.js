@@ -1,12 +1,12 @@
 import { Segment } from 'semantic-ui-react';
 import './App.css';
-import FormCliente from './views/cliente/FormCliente';
+import FormProduto from './views/produto/FormProduto';
 
 function App() {
   return (
     <div className="App">
 
-      <FormCliente/>
+      <FormProduto/>
 
       <Segment vertical color='grey' size='tiny' textAlign='center'>
           &copy; 2023 - Projeto WEB III - IFPE Jaboatão dos Guararapes

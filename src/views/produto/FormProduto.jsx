@@ -2,7 +2,7 @@ import React from "react";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 
-class FormCliente extends React.Component{
+class FormProduto extends React.Component{
 
     render(){
         return(
@@ -12,7 +12,7 @@ class FormCliente extends React.Component{
 
                     <Container textAlign='justified' >
 
-                        <h2> <span style={{color: 'darkgray'}}> Cliente &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
+                        <h2> <span style={{color: 'darkgray'}}> Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
 
                         <Divider />
 
@@ -25,51 +25,34 @@ class FormCliente extends React.Component{
 									<Form.Input
 										required
 										fluid
-										label='Nome'
-										maxLength="100"
+										label='Título'
+										maxLength="100"      
 									/>
 
 									<Form.Input
 										fluid
-										label='CPF'>
+										label='Código do Produto'>
 										<InputMask 
-										mask="999.999.999-99"/> 
+										mask="Informe o Código do Produto"/> 
 									</Form.Input>
 
 								</Form.Group>
 								
-								<Form.Group>
+								<Form.Group widths ="equal">
 
-									<Form.Input
-										fluid
-										label='Fone Celular'
-                                        width={6}>
-										<InputMask 
-										mask="(99) 9999.9999" /> 
-									</Form.Input>
+									<Form.TextArea
+									required
+                                    placeholder="Informe a Descrição do Produto"
+                                    fluid
+                                    label='Descrição'
+                                    maxLength="100"
+									/>
 
-									<Form.Input
-										fluid
-										label='Fone Fixo'
-                                        width={6}>
-										<InputMask 
-										mask="(99) 9999.9999" /> 
-									</Form.Input>
-
-                                    <Form.Input
-                                        fluid
-                                        label='Data Nascimento'
-                                        width={6}
-                                    >
-                                        <InputMask 
-                                            mask="99/99/9999" 
-                                            maskChar={null}
-                                            placeholder="Ex: 20/03/1985"
-                                        /> 
-                                    </Form.Input>
+									
 
 								</Form.Group>
 
+                                
 								<Form.Group widths='equal' style={{marginTop: '4%'}}  className='form--empresa-salvar'>
 
 									<Button
@@ -113,4 +96,4 @@ class FormCliente extends React.Component{
 	}
 }
 
-export default FormCliente;
+export default FormProduto;
