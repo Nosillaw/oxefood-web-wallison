@@ -18,8 +18,8 @@ class Home extends React.Component{
                                     Bem vindo ao sistema <strong>OxeFood</strong> ! <br/>
                                     Este sistema foi desenvolvido na disciplina de Desenvolvimento para WEB III. <br/> <br/>
 
-                                    Para acessar o código da <strong>API</strong> do sistema, acesse: <a href='https://github.com/Nosillaw/oxefood-api-wallison' target='_blank'> https://github.com/robertoalencar/oxefood-api </a> <br/> <br/>
-                                    Para acessar o código do <strong>Módulo WEB</strong>, acesse: <a href='https://github.com/Nosillaw/oxefood-web-wallison' target='_blank'> https://github.com/robertoalencar/oxefood-web </a>
+                                    Para acessar o código da <strong>API</strong> do sistema, acesse: <a href='https://github.com/Nosillaw/oxefood-api-wallison' target='_blank'> https://github.com/Nosillaw/oxefood-api-wallison </a> <br/> <br/>
+                                    Para acessar o código do <strong>Módulo WEB</strong>, acesse: <a href='https://github.com/Nosillaw/oxefood-web-wallison' target='_blank'> https://github.com/Nosillaw/oxefood-web-wallison </a>
 
                                 </Grid.Column>
                             </Grid.Row>
