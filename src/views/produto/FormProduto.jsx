@@ -1,8 +1,40 @@
+import axios from "axios";
 import React from "react";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 
 class FormProduto extends React.Component{
+
+    state = {
+
+        codigo: null,
+        titulo: null,
+        descricao: null,
+        valorUnitario: null,
+        tempoEntregaMinimo: null,
+        tempoEntregaMaximo: null
+    }
+
+    salvar = () => {
+
+        let produtoRequest = {
+
+            codigo: this.state.codigo,
+            titulo: this.state.titulo,
+            descricao: this.state.descricao,
+            valorUnitario: this.state.valorUnitario,
+            tempoEntregaMinimo: this.state.tempoEntregaMinimo,
+            tempoEntregaMaximo: this.state.tempoEntregaMaximo
+        }
+    
+        axios.post("http://localhost:8082/api/produto", produtoRequest)
+        .then((response) => {
+            console.log('Produto cadastrado com sucesso.')
+        })
+        .catch((error) => {
+            console.log('Erro ao incluir o um produto.')
+        })
+    }
 
     render(){
         return(
@@ -21,22 +53,30 @@ class FormProduto extends React.Component{
                             <Form>
                                 <Form.Group widths='equal'>
 
+                                    
+
                                     <Form.Input
                                         required
                                         fluid
                                         placeholder='informe nome do produto'
                                         label='Nome do Produto'
                                         maxLength="100"
-                                    />
+                                        value={this.state.titulo}
+                                        onChange={e => this.setState({titulo: e.target.value})}/> 
 
-                                    <Form.Input
+                                      <Form.Input
                                         required
                                         fluid
-                                        label='Codigo do Produto'>
+                                        label='Codigo do Produto'
+                                        value={this.state.codigo}
+                                        onChange={e => this.setState({codigo: e.target.value})}>
                                         <InputMask 
                                         placeholder="informe o codigo do produto"
-                                        mask="9999.9999.9999"/> 
+                                        mask="999.999"/> 
+                                     
                                     </Form.Input>
+                                    
+
 
                                 </Form.Group>
 
@@ -48,7 +88,8 @@ class FormProduto extends React.Component{
                                         fluid
                                         label='Descrição'
                                         maxLength="100"
-                                    />
+                                        value={this.state.descricao}
+                                        onChange={e => this.setState({descricao: e.target.value})}/> 
 
 
                                 </Form.Group>
@@ -62,19 +103,23 @@ class FormProduto extends React.Component{
                                         input type="number"
                                         
                                         label='Valor Unitario'
-                                        width={6}>
+                                        width={6}
+                                        value={this.state.valorUnitario}
+                                        onChange={e => this.setState({valorUnitario: e.target.value})}>
                                         <InputMask
-                                        placeholder="000,00"
-                                        number="100,00" /> 
+                                        placeholder="100.00"
+                                        number="100.00" /> 
                                     </Form.Input>
 
                                     <Form.Input
                                         
                                         fluid
                                         label='Tempo de Entrega Minimo em Minutos'
-                                        width={6}>
+                                        width={6}
+                                        value={this.state.tempoEntregaMinimo}
+                                        onChange={e => this.setState({tempoEntregaMinimo: e.target.value})} >
                                         <InputMask 
-                                        placeholder="30" /> 
+                                        placeholder="30" />
                                     </Form.Input>
 
                                     <Form.Input
@@ -87,6 +132,8 @@ class FormProduto extends React.Component{
                                             placeholder="40"
                                             mask="" 
                                             maskChar={null}
+                                            value={this.state.tempoEntregaMaximo}
+                                            onChange={e => this.setState({tempoEntregaMaximo: e.target.value})}
                                         /> 
                                     </Form.Input>
 
