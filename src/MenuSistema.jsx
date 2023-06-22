@@ -1,95 +1,87 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Menu } from "semantic-ui-react";
+import { Dropdown, Menu } from "semantic-ui-react";
 
 class MenuSistema extends React.Component{
 
-   state = {
-       activeItem: 'home'
-   }
+    state = {
+        activeItem: 'home'
+    }
 
    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-   render(){
-       return(
-           <>
-               <Menu inverted>
+    render(){
+        return(
+            <>
+                <Menu inverted>
                   
-                   <Menu.Item
-                       name='home'
-                       active={this.state.activeItem === 'home'}
-                       onClick={this.handleItemClick}
-                       as={Link}
-                       to='/'
-                   />
-              <Menu.Item
-                       name='cliente'
-                       active={this.state.activeItem === 'cliente'}
-                       onClick={this.handleItemClick}
-                       as={Link}
-                       to='/form-cliente'
-                   />
+                    <Menu.Item
+                        name='home'
+                        active={this.state.activeItem === 'home'}
+                        onClick={this.handleItemClick}
+                        as={Link}
+                        to='/'
+                    />
+                   
+                    <Menu.Item
+                        name='cliente'
+                        active={this.state.activeItem === 'cliente'}
+                        onClick={this.handleItemClick}
+                        as={Link}
+                        to='/list-cliente'
+                    />
+
+                    <Menu.Menu className='navbar__item--pc'>
+                        <Dropdown item text='Produto'>
+                            <Dropdown.Menu>
+                                <Dropdown.Item 
+                                    name='categoria'
+                                    active={this.state.activeItem === 'categoria'}
+                                    onClick={this.handleItemClick}
+                                    text='Categoria de Produto' 
+                                    as={Link} 
+                                    to='/list-categoria-produto'
+                                />
+                                <Dropdown.Item
+                                    name='produto'
+                                    active={this.state.activeItem === 'produto'}
+                                    onClick={this.handleItemClick}
+                                    text='Produto' 
+                                    as={Link} 
+                                    to='/list-produto'
+                                />
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Menu.Menu>
 
                     <Menu.Item
-                       name='list-Cliente'
-                       active={this.state.activeItem === 'list-Cliente'}
-                       onClick={this.handleItemClick}
-                       as={Link}
-                       to='/list-cliente'
-                   />
-
-                   <Menu.Item
-                       name='produto'
-                       active={this.state.activeItem === 'produto'}
-                       onClick={this.handleItemClick}
-                       as={Link}
-                       to='/form-produto'
-                   />
-
-                   <Menu.Item
-                       name='list-Produto'
-                       active={this.state.activeItem === 'list-Produto'}
-                       onClick={this.handleItemClick}
-                       as={Link}
-                       to='/list-Produto'
-                   />
-
-                   <Menu.Item
-                       name='entregador'
-                       active={this.state.activeItem === 'entregador'}
-                       onClick={this.handleItemClick}
-                       as={Link}
-                       to='/form-entregador'
-                   />
-
-                   <Menu.Item
-                       name='list-Entregador'
-                       active={this.state.activeItem === 'list-Entregador'}
-                       onClick={this.handleItemClick}
-                       as={Link}
-                       to='/list-Entregador'
-                   />
-
-<Menu.Item
-                       name='comprador'
-                       active={this.state.activeItem === 'comprador'}
-                       onClick={this.handleItemClick}
-                       as={Link}
-                       to='/form-comprador'
-                   />
+                        name='entregador'
+                        active={this.state.activeItem === 'entregador'}
+                        onClick={this.handleItemClick}
+                        as={Link}
+                        to='/list-entregador'
+                    />
 
                     <Menu.Item
-                       name='list-comprador'
-                       active={this.state.activeItem === 'list-comprador'}
-                       onClick={this.handleItemClick}
-                       as={Link}
-                       to='/list-comprador'
-                   />
+                        name='comprador'
+                        active={this.state.activeItem === 'comprador'}
+                        onClick={this.handleItemClick}
+                        as={Link}
+                        to='/form-comprador'
+                    />
 
-               </Menu>
-           </>
-       )
-   }
+                    <Menu.Item
+                        name='Cupom Desconto'
+                        active={this.state.activeItem === 'Cupom Desconto'}
+                        onClick={this.handleItemClick}
+                        as={Link}
+                        to='/form-cupom-desconto'
+                    />
+
+                </Menu>
+            </>
+        )
+    }
 }
 
 export default MenuSistema;

@@ -2,115 +2,127 @@ import axios from 'axios';
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Divider, Icon, Table } from 'semantic-ui-react';
+import { ENDERECO_API } from '../../views/util/Constantes';
 
 class ListComprador extends React.Component{
 
-   state = {
+    state = {
 
        listaCompradores: []
       
-   }
+    }
 
-   componentDidMount = () => {
+    componentDidMount = () => {
       
-       this.carregarLista();
+        this.carregarLista();
       
-   }
- 
-   carregarLista = () => {
+    }
 
-    axios.get("http://localhost:8082/api/comprador")
-    .then((response) => {
-       
-        this.setState({
-            listaCompradores: response.data
+    carregarLista = () => {
+
+        axios.get(ENDERECO_API + "api/comprador")
+        .then((response) => {
+          
+            this.setState({
+                listaCompradores: response.data
+            })
         })
-    })
 
-};
+    };
 
-formatarData = (dataParam) => {
+    formatarData = (dataParam) => {
 
-    let data = new Date(dataParam);
-    let dia = data.getDate() < 10 ? "0" + data.getDate() : data.getDate();
-    let mes = (data.getMonth() + 1) < 10 ? "0" + (data.getMonth() + 1) : (data.getMonth() + 1);
-    let dataFormatada = dia + "/" + mes + "/" + data.getFullYear();
-   
-    return dataFormatada
-};
-render(){
-    return(
-        <div>
+        if (dataParam == null || dataParam == '') {
+            return ''
+        }
+        
+        let dia = dataParam.substr(8,2);
+        let mes = dataParam.substr(5,2);
+        let ano = dataParam.substr(0,4);
+        let dataFormatada = dia + '/' + mes + '/' + ano;
 
-            <div style={{marginTop: '3%'}}>
+        return dataFormatada
+    };
 
-                <Container textAlign='justified' >
+    render(){
+        return(
+            <div>
 
-                    <h2> Comprador </h2>
+                <div style={{marginTop: '3%'}}>
 
-                    <Divider />
+                    <Container textAlign='justified' >
 
-                    <div style={{marginTop: '4%'}}>
+                        <h2> Comprador </h2>
 
-                        <Button
-                            inverted
-                            circular
-                            icon
-                            labelPosition='left'
-                            color='orange'
-                            floated='right'
-                        >
-                            <Icon name='clipboard outline' />
-                            <Link to={'/form-comprador'}>Novo</Link>
-                        </Button>
-                       
-                        <br/><br/><br/>
+                        <Divider />
+
+                        <div style={{marginTop: '4%'}}>
+
+                            <Button
+                                inverted
+                                circular
+                                icon
+                                labelPosition='left'
+                                color='orange'
+                                floated='right'
+                            >
+                                <Icon name='clipboard outline' />
+                                <Link to={'/form-comprador'}>Novo</Link>
+                            </Button>
+
+                            <br/><br/><br/>
                       
-                      <Table color='orange' sortable celled>
+                            <Table color='orange' sortable celled>
 
-                          <Table.Header>
-                              <Table.Row>
-                                  <Table.HeaderCell>ID</Table.HeaderCell>
-                                  <Table.HeaderCell>Nome</Table.HeaderCell>
-                                  <Table.HeaderCell>Valor de Comissão</Table.HeaderCell>
-                                  <Table.HeaderCell>QTD Compras em Média no Mês</Table.HeaderCell>
-                                  <Table.HeaderCell>Contratado Em</Table.HeaderCell>
-                                  <Table.HeaderCell>Endereço Residencial</Table.HeaderCell>
-                                  <Table.HeaderCell>Endereço Comercial</Table.HeaderCell>
-                                  <Table.HeaderCell textAlign='center' width={2}>Ações</Table.HeaderCell>
-                              </Table.Row>
-                          </Table.Header>
-                     
-                          <Table.Body>
+                                <Table.Header>
+                                    <Table.Row>
+                                        <Table.HeaderCell>Nome</Table.HeaderCell>
+                                        <Table.HeaderCell>Valor de Comissão</Table.HeaderCell>
+                                        <Table.HeaderCell>Contratado Em</Table.HeaderCell>
+                                        <Table.HeaderCell>QTD Compras no Mês</Table.HeaderCell>
+                                        <Table.HeaderCell>Endereço Residencial</Table.HeaderCell>
+                                        <Table.HeaderCell>Trabalha em Home Office?</Table.HeaderCell>
+                                        <Table.HeaderCell textAlign='center' width={2}>Ações</Table.HeaderCell>
+                                    </Table.Row>
+                                </Table.Header>
+                          
+                                <Table.Body>
 
-                              { this.state.listaCompradores.map(comprador => (
+                                    { this.state.listaCompradores.map(c => (
 
-                                  <Table.Row>
-                                      <Table.Cell>{comprador.id}</Table.Cell>
-                                      <Table.Cell>{comprador.nome}</Table.Cell>
-                                      <Table.Cell>{comprador.comissao}</Table.Cell>
-                                      <Table.Cell>{comprador.qtdComprasMediasMes}</Table.Cell>
-                                      <Table.Cell>{this.formatarData(comprador.contratadoEm)}</Table.Cell>
-                                      <Table.Cell>{comprador.enderecoResidencial}</Table.Cell>
-                                      <Table.Cell>{comprador.enderecoComercial}</Table.Cell>
-                                      <Table.Cell textAlign='center'>
-                                         
-                                          <Button
-                                              inverted
-                                              circular
-                                              icon='edit'
-                                              color='blue'
-                                              itle='Clique aqui para editar os dados deste comprador' /> &nbsp;
-                                          <Button
+                                        <Table.Row>
+                                            <Table.Cell>{c.nome}</Table.Cell>
+                                            <Table.Cell>{c.comissao}</Table.Cell>
+                                            <Table.Cell>{this.formatarData(c.contratadoEm)}</Table.Cell>
+                                            <Table.Cell>{c.qtdComprasMediasMes}</Table.Cell>
+                                            <Table.Cell>{c.enderecoResidencial}</Table.Cell>
+                                            <Table.Cell>
+                                                {c.trabahoHomeOffice === true &&
+                                                    <span> Sim </span>
+                                                }
+                                                {c.trabahoHomeOffice === false &&
+                                                    <span> Não </span>
+                                                }
+                                            </Table.Cell>
+                                            <Table.Cell textAlign='center'>
+                                              
+                                                <Button
+                                                   inverted
+                                                   circular
+                                                   icon='edit'
+                                                   color='blue'
+                                                   itle='Clique aqui para editar os dados deste cliente' /> &nbsp;
+                                                   
+                                                <Button
                                                    inverted
                                                    circular
                                                    icon='trash'
                                                    color='red'
-                                                   title='Clique aqui para remover este comprador' />
+                                                   title='Clique aqui para remover este cliente' />
 
-                                           </Table.Cell>
-                                       </Table.Row>
-                                   ))}
+                                            </Table.Cell>
+                                        </Table.Row>
+                                    ))}
 
                                </Table.Body>
                            </Table>
